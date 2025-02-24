@@ -1,6 +1,3 @@
-from bookshelf.models import Book
-
+```python
 book = Book.objects.get(title="1984")
-print(f"Title: {book.title}, Author: {book.author}, year: {book.publication_year})
-
-## Expected Output:
+print(book.title, book.author, book.publication_year)
