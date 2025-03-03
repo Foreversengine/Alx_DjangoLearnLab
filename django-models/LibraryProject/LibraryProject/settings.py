@@ -147,5 +147,6 @@ LOGGING = {
     },
 }
 
-LOGIN_REDIRECT_URL = '/'  # Redirect to home page after login
-LOGOUT_REDIRECT_URL = '/login/'  # Redirect to login after logout
+LOGIN_REDIRECT_URL = '/'  # Redirect users after login
+LOGOUT_REDIRECT_URL = '/login/'  # Redirect after logout
+LOGIN_URL = '/login/'  # Required for @login_required

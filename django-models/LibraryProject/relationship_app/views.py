@@ -9,7 +9,7 @@ def register_user(request):
         if form.is_valid():
             user = form.save()
             login(request, user)  # Log in the user immediately after registration
-            return redirect('home')  # Redirect to home page (or change to a relevant page)
+            return redirect('home')  # Redirect to home or another page
     else:
         form = UserCreationForm()
     return render(request, 'relationship_app/register.html', {'form': form})
@@ -21,7 +21,7 @@ def login_user(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            return redirect('home')  # Redirect to home page
+            return redirect('home')  # Redirect to home
     else:
         form = AuthenticationForm()
     return render(request, 'relationship_app/login.html', {'form': form})
@@ -29,19 +29,4 @@ def login_user(request):
 # User Logout View
 def logout_user(request):
     logout(request)
-    return redirect('login')  # Redirect to login page after logout
-
-from django.shortcuts import render  # ✅ For rendering templates
-from django.views.generic.detail import DetailView  # ✅ For class-based views
-from .models import Library, Book  # ✅ Fix: Import both models
-
-# Function-Based View (FBV) for listing books
-def list_books(request):
-    books = Book.objects.all()  # ✅ Get all books from the database
-    return render(request, 'relationship_app/list_books.html', {'books': books})  # ✅ Pass books to template
-
-# Class-Based View (CBV) for displaying a library's details
-class LibraryDetailView(DetailView):
-    model = Library  # ✅ Tell Django this is for Library data
-    template_name = 'relationship_app/library_detail.html'  # ✅ Ensure this template exists
-    context_object_name = 'library'  # ✅ In the template, access data as {{ library }}
+    return redirect('login')  # Redirect to login after logout
