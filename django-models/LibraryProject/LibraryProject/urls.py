@@ -1,8 +1,7 @@
-from django.urls import path
-from . import views
+from django.contrib import admin
+from django.urls import path, include  # Import include
 
 urlpatterns = [
-    path('author/<str:author_name>/', views.author_books, name='author_books'),
-    path('library/<str:library_name>/', views.library_books, name='library_books'),
-    path('librarian/<str:library_name>/', views.librarian_details, name='librarian_details'),
+    path('admin/', admin.site.urls),  
+    path('', include('relationship_app.urls')),  # This connects your app’s URLs to the root
 ]
