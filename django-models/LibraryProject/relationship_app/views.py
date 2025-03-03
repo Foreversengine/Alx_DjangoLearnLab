@@ -1,13 +1,14 @@
 from django.shortcuts import render
-from .models import Book  # Import the Book model
+from .models import Book
 
 def list_books(request):
-    books = Book.objects.all()  # Get all books from the database
-    return render(request, 'list_books.html', {'books': books})  # Pass books to the template
+    books = Book.objects.all()
+    return render(request, 'relationship_app/list_books.html', {'books': books})
+
 from django.views.generic import DetailView
-from .models import Library  # Import the Library model
+from .models import Library
 
 class LibraryDetailView(DetailView):
     model = Library
-    template_name = 'library_detail.html'  # Use the HTML template for display
-    context_object_name = 'library'  # The variable name in the template
+    template_name = 'relationship_app/library_detail.html'
+    context_object_name = 'library'
