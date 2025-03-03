@@ -146,3 +146,6 @@ LOGGING = {
         },
     },
 }
+
+LOGIN_REDIRECT_URL = '/'  # Redirect to home page after login
+LOGOUT_REDIRECT_URL = '/login/'  # Redirect to login after logout
