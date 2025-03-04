@@ -2,47 +2,31 @@ import os
 import django
 
 # Set up Django environment
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'django_models.settings')
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "django_models.settings")  # Change django_models to your project name
 django.setup()
 
-from relationship_app.models import Author, Book, Library, Librarian
+from relationship_app.models import Author, Library, Book, Librarian
 
-# Query 1: Get all books by a specific author
 def get_books_by_author(author_name):
-    try:
-        author = Author.objects.get(name=author_name)
-        books = author.books.all()
-        print(f"Books by {author_name}:")
-        for book in books:
-            print(book.title)
-    except Author.DoesNotExist:
-        print(f"Author '{author_name}' not found.")
+    author = Author.objects.get(name=author_name)
+    book = Book.objects.filter(author=author)
+    return book
+    # return author.book_set.all()
+    
+    
+   
 
-# Query 2: List all books in a library
 def get_books_in_library(library_name):
-    try:
-        library = Library.objects.get(name=library_name)
-        books = library.books.all()
-        print(f"Books in {library_name}:")
-        for book in books:
-            print(book.title)
-    except Library.DoesNotExist:
-        print(f"Library '{library_name}' not found.")
+    library = Library.objects.get(name=library_name)
+    return library.books.all()
+    
 
-# Query 3: Retrieve the librarian for a library
+
+# Retrieve the librarian for a library
 def get_librarian_for_library(library_name):
-    try:
-        library = Library.objects.get(name=library_name)
-        librarian = library.librarian
-        print(f"Librarian for {library_name}: {librarian.name}")
-    except Library.DoesNotExist:
-        print(f"Library '{library_name}' not found.")
-    except Librarian.DoesNotExist:
-        print(f"No librarian found for {library_name}.")
-
-# Run the queries
-if __name__ == "__main__":
-    # Example usage
-    get_books_by_author("J.K. Rowling")
-    get_books_in_library("Central Library")
-    get_librarian_for_library("Central Library")
+    # library = Library.objects.get(name=library_name)
+    # return library.librarian
+    
+    library = Library.objects.get(name=library_name)
+    librarian_name = Librarian.objects.get(library=library)
+    return librarian_name

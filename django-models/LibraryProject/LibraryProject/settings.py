@@ -56,8 +56,8 @@ ROOT_URLCONF = 'LibraryProject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],  # This should be empty or correctly configured
-        'APP_DIRS': True,  # MUST be True for Django to auto-detect app templates
+        'DIRS': [ BASE_DIR / "templates" ],
+        'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -126,27 +126,3 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = "home"
 LOGOUT_REDIRECT_URL = "login"
-
-import logging
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'file': {
-            'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'filename': 'debug.log',
-        },
-    },
-    'loggers': {
-        'django.template': {
-            'handlers': ['file'],
-            'level': 'DEBUG',
-            'propagate': True,
-        },
-    },
-}
-
-LOGIN_REDIRECT_URL = '/'  # Redirect users after login
-LOGOUT_REDIRECT_URL = '/login/'  # Redirect after logout
-LOGIN_URL = '/login/'  # Required for @login_required
